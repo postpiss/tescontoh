@@ -38,6 +38,43 @@
             border-color: #3b82f6;
             transform: scale(1.05);
         }
+        .color-variant.active {
+            border-color: #3b82f6;
+            transform: scale(1.05);
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        .bottom-nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 12px 0;
+        }
+        .bottom-nav-btn {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        .bottom-nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        .bottom-nav-btn i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50">
@@ -316,7 +353,8 @@
             </div>
         </div>
     </section>
-    
+
+
     <!-- Order Form -->
     <section id="order" class="py-16 bg-gray-100">
         <div class="container mx-auto px-4">
@@ -396,26 +434,31 @@
         </div>
     </section>
 
-    <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg">
-        <div class="container mx-auto px-4 py-3">
-            <a href="https://www.mirellainc.com" class="flex flex-col items-center justify-center text-blue-600 hover:text-blue-800">
-                <i class="fas fa-home text-2xl mb-1"></i>
-                <span class="text-sm font-medium">Home</span>
-            </a>
-        </div>
-    </div>
-
     <!-- Footer -->
-    <footer class="gradient-bg text-white py-8" style="margin-bottom: 70px;">
+    <footer class="gradient-bg text-white py-8">
         <div class="container mx-auto px-4">
             <div class="text-center">
                 <h3 class="text-2xl font-bold mb-4">INSTAN DAILY MALAY</h3>
                 <p class="mb-6">Hijab Instan Premium untuk Penampilan Elegan Setiap Hari</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-instagram text-2xl"></i></a>
+                    <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-whatsapp text-2xl"></i></a>
+                    <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-facebook text-2xl"></i></a>
+                </div>
                 <p class="text-sm text-blue-100">© 2025 Instan Daily Malay. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="container bottom-nav-container mx-auto">
+            <a href="https://www.mirellainc.com" class="bottom-nav-btn" target="_blank">
+                <i class="fas fa-home"></i>
+                <span>Toko Kami</span>
+            </a>
+        </div>
+    </div>
 
     <!-- Countdown Timer Script -->
     <script>

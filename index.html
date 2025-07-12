@@ -238,7 +238,22 @@
             const colorTheme = document.getElementById('color-theme').value;
             const layoutStyle = document.getElementById('layout-style').value;
             const apiKey = document.getElementById('api-key').value;
-            
+            // Tambahkan fungsi validasi ini
+function isValidApiKey(key) {
+    return key && key.startsWith('sk-') && key.length > 30;
+}
+
+// Modifikasi event listener generate button
+document.getElementById('generate-btn').addEventListener('click', async function() {
+    const apiKey = document.getElementById('api-key').value.trim();
+    
+    if (!isValidApiKey(apiKey)) {
+        alert('API key tidak valid! Pastikan key Anda dimulai dengan "sk-" dan panjangnya lebih dari 30 karakter');
+        return;
+    }
+    
+    // Lanjutkan proses generate...
+});
             if (!prompt) {
                 alert('Silakan masukkan prompt terlebih dahulu!');
                 return;

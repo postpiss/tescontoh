@@ -3,413 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hijab Collection - Beautiful Scarves for Every Occasion</title>
+    <title>HTML Code Encryptor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .code-editor {
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
         }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+        .tab-active {
+            border-bottom: 3px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .copy-btn {
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        .copy-btn.copied {
+            background-color: #10b981 !important;
         }
     </style>
 </head>
-<body class="font-sans bg-gray-50">
-    <!-- Header -->
-    <header class="sticky top-0 z-10 bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-hands-praying text-2xl text-emerald-600 mr-2"></i>
-                <h1 class="text-xl font-bold text-emerald-800">Beauty Hijab</h1>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">HTML Code Encryptor</h1>
+            <p class="text-gray-600">Protect your HTML source code by converting it to JavaScript document.write format</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+            <div class="flex border-b">
+                <button id="html-tab" class="px-4 py-3 font-medium text-gray-600 tab-active">HTML Input</button>
+                <button id="js-tab" class="px-4 py-3 font-medium text-gray-600">JavaScript Output</button>
+            </div>
+            
+            <div class="p-4">
+                <div id="html-content" class="tab-content">
+                    <textarea id="html-input" class="w-full p-3 border rounded-lg code-editor" placeholder="Paste your HTML code here..."></textarea>
+                    <div class="flex justify-between mt-4">
+                        <div>
+                            <button id="sample-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg mr-2">
+                                <i class="fas fa-file-code mr-2"></i>Load Sample
+                            </button>
+                            <button id="clear-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                                <i class="fas fa-trash-alt mr-2"></i>Clear
+                            </button>
+                        </div>
+                        <button id="encrypt-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">
+                            <i class="fas fa-lock mr-2"></i>Encrypt HTML
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="js-content" class="tab-content hidden">
+                    <div class="relative">
+                        <pre id="js-output" class="w-full p-3 border rounded-lg bg-gray-50 overflow-x-auto code-editor" style="min-height: 200px;"></pre>
+                        <button id="copy-btn" class="copy-btn absolute top-2 right-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-600">
+                        <p><i class="fas fa-info-circle mr-2"></i>This encrypted code can be used in your HTML file. It will output your original HTML when executed.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="gradient-bg py-8 px-4">
-        <div class="container mx-auto text-center">
-            <h2 class="text-2xl font-bold text-emerald-800 mb-2">Premium Hijab Collection</h2>
-            <p class="text-gray-600 mb-4">Discover our latest modest fashion for every occasion</p>
-            <div class="flex justify-center space-x-2">
-                <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">Berkualitas</span>
-                <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">New Arrivals</span>
-                <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">New Arrivals</span>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">How to Use</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="text-blue-600 mb-2">
+                        <i class="fas fa-key text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2">1. Paste HTML</h3>
+                    <p class="text-gray-600 text-sm">Paste your HTML code into the input area or load a sample to test.</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="text-blue-600 mb-2">
+                        <i class="fas fa-lock text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2">2. Encrypt</h3>
+                    <p class="text-gray-600 text-sm">Click the "Encrypt HTML" button to convert your code to JavaScript format.</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="text-blue-600 mb-2">
+                        <i class="fas fa-code text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800 mb-2">3. Copy & Use</h3>
+                    <p class="text-gray-600 text-sm">Copy the encrypted JavaScript code and use it in your HTML file.</p>
+                </div>
             </div>
         </div>
-    </section>
-
-    <!-- Product Grid -->
-    <main class="container mx-auto px-4 py-6">
-              <div class="flex items-center justify-between mb-6">
-            <h3 class="text-lg font-semibold text-gray-800">New Arrival Products</h3>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-            <!-- Product 1 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-             <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 6 -->
-             <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 7 -->
-             <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 8 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 9 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-
-            <!-- Product 10 -->
-            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300">
-                <div class="relative">
-                    <img src="https://cdn.orderonline.id/uploads/images_4700281751898944239.png" alt="Elegant Navy Pashmina" class="w-full h-48 object-cover">
-                    <span class="absolute top-2 right-2 bg-rose-500 text-white text-xs px-2 py-1 rounded-full">SALE</span>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-medium text-gray-800 mb-1">Khimar Syari Dagu
-</h3>
-                    <div class="flex items-center mb-1">
-                        <div class="flex text-amber-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(48)</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-600">Rp 89,000</span>
-                        <button class="text-emerald-600 hover:text-emerald-800">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                    <a href="https://www.mirellainc.com" class="block w-full py-2 px-4 bg-amber-700 text-white text-sm font-medium rounded-md hover:bg-amber-600 transition-colors text-center">
-                        Belanja Sekarang
-                    </a>
-                </div>
-            </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Load More Button -->
-    <div class="container mx-auto px-4 py-6 text-center">
-        <button class="px-6 py-2 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-colors">
-            Load More Products
-        </button>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-emerald-800 text-white py-8 px-4">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-2 gap-8 mb-6">
-                <div>
-                    <h3 class="font-bold mb-3">Shop</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-emerald-100 hover:text-white">New Arrivals</a></li>
-                        <li><a href="#" class="text-emerald-100 hover:text-white">Best Sellers</a></li>
-                        <li><a href="#" class="text-emerald-100 hover:text-white">Sale</a></li>
-                        <li><a href="#" class="text-emerald-100 hover:text-white">Collections</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold mb-3">Help</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-emerald-100 hover:text-white">Contact Us</a></li>
-                        <li><a href="#" class="text-emerald-100 hover:text-white">FAQs</a></li>
-                        <li><a href="#" class="text-emerald-100 hover:text-white">Shipping</a></li>
-                        <li><a href="#" class="text-emerald-100 hover:text-white">Returns</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-emerald-700 pt-6">
-                <div class="flex justify-center space-x-6 mb-4">
-                    <a href="#" class="text-2xl text-emerald-100 hover:text-white"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-2xl text-emerald-100 hover:text-white"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="text-2xl text-emerald-100 hover:text-white"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="text-2xl text-emerald-100 hover:text-white"><i class="fab fa-whatsapp"></i></a>
-                </div>
-                <p class="text-center text-emerald-100 text-sm">© 2023 Hijab Haven. All rights reserved.</p>
-            </div>
+    <footer class="bg-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>HTML Code Encryptor - Protect your source code from being easily viewed</p>
         </div>
     </footer>
 
     <script>
-        // Simple script to show a message when clicking on product cards
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const productName = this.querySelector('h3').textContent;
-                alert(`You clicked on: ${productName}\nThis would normally open the product details page.`);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const htmlTab = document.getElementById('html-tab');
+            const jsTab = document.getElementById('js-tab');
+            const htmlContent = document.getElementById('html-content');
+            const jsContent = document.getElementById('js-content');
+            
+            htmlTab.addEventListener('click', function() {
+                htmlTab.classList.add('tab-active');
+                jsTab.classList.remove('tab-active');
+                htmlContent.classList.remove('hidden');
+                jsContent.classList.add('hidden');
             });
-        });
-    </script>
+            
+            jsTab.addEventListener('click', function() {
+                jsTab.classList.add('tab-active');
+                htmlTab.classList.remove('tab-active');
+                jsContent.classList.remove('hidden');
+                htmlContent.classList.add('hidden');
+            });
+            
+            // Sample HTML
+            const sampleBtn = document.getElementById('sample-btn');
+            const htmlInput = document.getElementById('html-input');
+            
+            sampleBtn.addEventListener('click', function() {
+                htmlInput.value = `<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Page</title>
+    <style>
+        body { font-family: Arial; }
+        .header { color: blue; }
+    </style>
+</head>
+<body>
+    <h1 class="header">Welcome to My Website</h1>
+    <p>This is a sample HTML code to demonstrate the encryption.</p>
+    <button onclick="alert('Hello!')">Click Me</button>
 </body>
 </html>

@@ -3,783 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSite - Generator Landing Page Mewah</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Generator Landing Page dari Prompt</title>
     <style>
-        :root {
-            --primary: #6a11cb;
-            --secondary: #2575fc;
-            --accent: #ff4d4d;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gold: #ffd700;
-        }
-        
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            color: var(--dark);
+            background-color: #f5f7fa;
+            color: #333;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 20px;
         }
         
         header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background-color: #4a6bff;
             color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 2rem;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .header-content {
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .generator-section {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .input-section, .output-section {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #4a6bff;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            background-color: #4a6bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #3a5bef;
+        }
+        
+        .preview {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            min-height: 300px;
+            background: #f9f9f9;
+            overflow: auto;
+        }
+        
+        .options {
+            margin: 15px 0;
+        }
+        
+        .option-group {
+            margin-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .download-btn {
+            background-color: #28a745;
+            margin-top: 10px;
+        }
+        
+        .download-btn:hover {
+            background-color: #218838;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .generator-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Generator Landing Page dari Prompt</h1>
+            <p>Buat landing page profesional hanya dengan menuliskan deskripsi Anda</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="generator-section">
+            <div class="input-section">
+                <h2>Masukkan Prompt Anda</h2>
+                <textarea id="prompt-input" placeholder="Contoh: Buatkan landing page untuk produk kecantikan dengan warna pink, judul 'Glow Serum', deskripsi produk, tombol CTA 'Beli Sekarang', dan testimonial pelanggan"></textarea>
+                
+                <div class="options">
+                    <div class="option-group">
+                        <label for="color-theme">Warna Tema:</label>
+                        <select id="color-theme">
+                            <option value="#4a6bff">Biru</option>
+                            <option value="#28a745">Hijau</option>
+                            <option value="#dc3545">Merah</option>
+                            <option value="#ffc107">Kuning</option>
+                            <option value="#6f42c1">Ungu</option>
+                            <option value="#fd7e14">Oranye</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="layout-style">Gaya Layout:</label>
+                        <select id="layout-style">
+                            <option value="modern">Modern</option>
+                            <option value="minimal">Minimalis</option>
+                            <option value="corporate">Korporat</option>
+                            <option value="creative">Kreatif</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="include-sections">Sertakan Bagian:</label>
+                        <select id="include-sections" multiple>
+                            <option value="hero" selected>Hero Section</option>
+                            <option value="features" selected>Fitur</option>
+                            <option value="testimonials" selected>Testimonial</option>
+                            <option value="pricing" selected>Harga</option>
+                            <option value="faq" selected>FAQ</option>
+                            <option value="contact" selected>Kontak</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="generate-btn">Generate Landing Page</button>
+            </div>
+            
+            <div class="output-section">
+                <h2>Hasil Landing Page</h2>
+                <div class="preview" id="html-preview">
+                    <p>Landing page akan muncul di sini setelah Anda mengklik tombol generate.</p>
+                </div>
+                <button id="copy-btn">Salin Kode HTML</button>
+                <button class="download-btn" id="download-btn">Download sebagai HTML</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Generator Landing Page &copy; 2023 | Dibuat dengan ❤️ untuk kebutuhan pemasaran digital</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const prompt = document.getElementById('prompt-input').value;
+            const colorTheme = document.getElementById('color-theme').value;
+            const layoutStyle = document.getElementById('layout-style').value;
+            
+            if (!prompt) {
+                alert('Silakan masukkan prompt terlebih dahulu!');
+                return;
+            }
+            
+            // Simulasi generasi landing page berdasarkan prompt
+            // Dalam implementasi nyata, ini akan terhubung dengan API AI
+            const generatedHTML = generateLandingPage(prompt, colorTheme, layoutStyle);
+            
+            document.getElementById('html-preview').innerHTML = generatedHTML;
+            
+            // Buat iframe untuk preview yang lebih baik
+            const previewFrame = document.createElement('iframe');
+            previewFrame.style.width = '100%';
+            previewFrame.style.height = '500px';
+            previewFrame.style.border = '1px solid #ddd';
+            previewFrame.style.borderRadius = '4px';
+            previewFrame.style.backgroundColor = 'white';
+            
+            document.getElementById('html-preview').innerHTML = '';
+            document.getElementById('html-preview').appendChild(previewFrame);
+            
+            const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            previewDoc.open();
+            previewDoc.write(generatedHTML);
+            previewDoc.close();
+        });
+        
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const preview = document.getElementById('html-preview');
+            const iframe = preview.querySelector('iframe');
+            
+            if (iframe) {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const htmlContent = iframeDoc.documentElement.outerHTML;
+                
+                navigator.clipboard.writeText(htmlContent).then(function() {
+                    alert('Kode HTML berhasil disalin!');
+                }, function() {
+                    alert('Gagal menyalin kode HTML.');
+                });
+            } else {
+                alert('Generate landing page terlebih dahulu!');
+            }
+        });
+        
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const preview = document.getElementById('html-preview');
+            const iframe = preview.querySelector('iframe');
+            
+            if (iframe) {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const htmlContent = iframeDoc.documentElement.outerHTML;
+                
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'landing-page.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else {
+                alert('Generate landing page terlebih dahulu!');
+            }
+        });
+        
+        function generateLandingPage(prompt, color, style) {
+            // Ini adalah fungsi simulasi untuk demo
+            // Dalam implementasi nyata, ini akan memanggil API AI atau menggunakan template yang lebih canggih
+            
+            const title = extractTitle(prompt) || "Produk Unggulan Kami";
+            const ctaText = extractCTAText(prompt) || "Beli Sekarang";
+            
+            return `
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: ${color};
+            color: white;
+            padding: 20px 0;
+        }
+        
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
         }
         
-        .logo i {
-            margin-right: 10px;
-            color: var(--gold);
+        .hero {
+            background-color: ${lightenColor(color, 90)};
+            padding: 80px 0;
+            text-align: center;
         }
         
-        .main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: ${color};
         }
         
-        .generator-section {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-        
-        .preview-section {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            overflow-y: auto;
-            max-height: 80vh;
-        }
-        
-        h1, h2, h3 {
-            color: var(--primary);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        textarea, input, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        textarea:focus, input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
         }
         
         .btn {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            display: inline-block;
+            background-color: ${color};
             color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn i {
-            margin-right: 8px;
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            margin-left: 10px;
-        }
-        
-        .btn-secondary:hover {
-            background: #f8f9fa;
-        }
-        
-        .preview-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .preview-header h2 {
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .preview-content {
-            line-height: 1.6;
-        }
-        
-        .luxury-section {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-        
-        .cta-button {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 1rem;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background-color: ${darkenColor(color, 10)};
         }
         
         .features {
+            padding: 80px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            color: ${color};
+            margin-bottom: 50px;
+        }
+        
+        .feature-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
         
         .feature {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--primary);
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .feature i {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .testimonials {
-            margin: 2rem 0;
-        }
-        
-        .testimonial {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        
-        .testimonial:before {
-            content: """;
-            font-size: 4rem;
-            color: rgba(106, 17, 203, 0.1);
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            line-height: 1;
-        }
-        
-        .testimonial-author {
-            font-weight: 600;
-            margin-top: 1rem;
-            color: var(--primary);
+        .feature-icon {
+            font-size: 2.5rem;
+            color: ${color};
+            margin-bottom: 20px;
         }
         
         footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
             text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 20px 20px 0 0;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-        
-        .copy-code {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            position: relative;
-        }
-        
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <i class="fas fa-crown"></i>
-                DeepSite
-            </div>
-            <div>
-                <span>Generator Landing Page Mewah</span>
-            </div>
+        <div class="container">
+            <nav>
+                <div class="logo">${title.split(' ')[0]}</div>
+                <div>
+                    <a href="#" class="btn">${ctaText}</a>
+                </div>
+            </nav>
         </div>
     </header>
     
-    <div class="container">
-        <main class="main">
-            <section class="generator-section">
-                <h2><i class="fas fa-magic"></i> Buat Landing Page Mewah</h2>
-                <p>Masukkan detail produk/layanan Anda dan kami akan menghasilkan landing page mewah yang menarik.</p>
-                
-                <div class="form-group">
-                    <label for="product-name">Nama Produk/Layanan</label>
-                    <input type="text" id="product-name" placeholder="Contoh: Luxe Perfume Collection">
-                </div>
-                
-                <div class="form-group">
-                    <label for="product-description">Deskripsi Produk/Layanan</label>
-                    <textarea id="product-description" placeholder="Jelaskan produk/layanan Anda dengan detail. Contoh: Koleksi parfum eksklusif dengan aroma yang memikat, dibuat dari bahan-bahan alami pilihan..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="target-audience">Target Audiens</label>
-                    <input type="text" id="target-audience" placeholder="Contoh: Wanita profesional usia 25-45 tahun">
-                </div>
-                
-                <div class="form-group">
-                    <label for="tone">Nada dan Gaya</label>
-                    <select id="tone">
-                        <option value="elegant">Elegant & Klasik</option>
-                        <option value="modern">Modern & Minimalis</option>
-                        <option value="luxury">Mewah & Eksklusif</option>
-                        <option value="vintage">Vintage & Antik</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="key-features">Fitur Utama (pisahkan dengan koma)</label>
-                    <textarea id="key-features" placeholder="Contoh: Bahan premium, Desain eksklusif, Garansi seumur hidup"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="cta-text">Teks Call-to-Action</label>
-                    <input type="text" id="cta-text" placeholder="Contoh: Pesan Sekarang - Harga Eksklusif">
-                </div>
-                
-                <button id="generate-btn" class="btn"><i class="fas fa-sparkles"></i> Generate Landing Page</button>
-                <button id="copy-btn" class="btn btn-secondary"><i class="fas fa-copy"></i> Salin Kode</button>
-            </section>
-            
-            <section class="preview-section">
-                <div class="preview-header">
-                    <h2>Pratinjau Landing Page</h2>
-                    <p>Hasil akan muncul di sini</p>
-                </div>
-                <div class="preview-content" id="preview-content">
-                    <div style="text-align: center; padding: 2rem; color: #666;">
-                        <i class="fas fa-sparkles" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
-                        <p>Masukkan detail produk/layanan Anda dan klik "Generate" untuk melihat pratinjau landing page mewah.</p>
-                    </div>
-                </div>
-                
-                <div class="copy-code" style="display: none;" id="code-section">
-                    <button class="copy-btn" id="copy-code-btn"><i class="fas fa-copy"></i> Salin</button>
-                    <pre id="generated-code"></pre>
-                </div>
-            </section>
-        </main>
-    </div>
+    <section class="hero">
+        <div class="container">
+            <h1>${title}</h1>
+            <p>${extractDescription(prompt) || "Solusi terbaik untuk kebutuhan Anda. Dapatkan sekarang dan rasakan perbedaannya!"}</p>
+            <a href="#" class="btn">${ctaText}</a>
+        </div>
+    </section>
     
-    <script>
-        document.getElementById('generate-btn').addEventListener('click', function() {
-            const productName = document.getElementById('product-name').value || 'Produk Eksklusif';
-            const productDescription = document.getElementById('product-description').value || 'Deskripsi produk mewah yang menarik perhatian pelanggan.';
-            const targetAudience = document.getElementById('target-audience').value || 'Pelanggan yang menginginkan yang terbaik';
-            const tone = document.getElementById('tone').value;
-            const keyFeatures = document.getElementById('key-features').value.split(',').map(f => f.trim()).filter(f => f) || ['Fitur Premium', 'Kualitas Terbaik', 'Desain Eksklusif'];
-            const ctaText = document.getElementById('cta-text').value || 'Pesan Sekarang';
-            
-            let toneClass = '';
-            let toneStyle = '';
-            
-            switch(tone) {
-                case 'elegant':
-                    toneClass = 'elegant';
-                    toneStyle = `
-                        .luxury-section {
-                            background: linear-gradient(135deg, rgba(106, 17, 203, 0.1) 0%, rgba(255, 255, 255, 0.9) 100%);
-                            border: 1px solid rgba(106, 17, 203, 0.3);
-                        }
-                        .cta-button {
-                            background: linear-gradient(to right, #6a11cb, #2575fc);
-                        }
-                    `;
-                    break;
-                case 'modern':
-                    toneClass = 'modern';
-                    toneStyle = `
-                        .luxury-section {
-                            background: linear-gradient(135deg, rgba(37, 117, 252, 0.1) 0%, rgba(255, 255, 255, 0.9) 100%);
-                            border: 1px solid rgba(37, 117, 252, 0.3);
-                        }
-                        .cta-button {
-                            background: linear-gradient(to right, #2575fc, #00d2ff);
-                        }
-                    `;
-                    break;
-                case 'luxury':
-                    toneClass = 'luxury';
-                    toneStyle = `
-                        .luxury-section {
-                            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 255, 255, 0.9) 100%);
-                            border: 1px solid rgba(255, 215, 0, 0.3);
-                        }
-                        .cta-button {
-                            background: linear-gradient(to right, #d4af37, #f2d272);
-                            color: #000;
-                        }
-                    `;
-                    break;
-                case 'vintage':
-                    toneClass = 'vintage';
-                    toneStyle = `
-                        .luxury-section {
-                            background: linear-gradient(135deg, rgba(139, 69, 19, 0.1) 0%, rgba(255, 255, 255, 0.9) 100%);
-                            border: 1px solid rgba(139, 69, 19, 0.3);
-                        }
-                        .cta-button {
-                            background: linear-gradient(to right, #8B4513, #CD853F);
-                        }
-                    `;
-                    break;
-            }
-            
-            const featuresHTML = keyFeatures.map(feature => `
+    <section class="features">
+        <div class="container">
+            <h2>Fitur Unggulan</h2>
+            <div class="feature-grid">
                 <div class="feature">
-                    <i class="fas fa-star"></i>
-                    <h3>${feature}</h3>
-                    <p>${getFeatureDescription(feature)}</p>
+                    <div class="feature-icon">✓</div>
+                    <h3>Fitur 1</h3>
+                    <p>Deskripsi singkat tentang fitur pertama yang menarik.</p>
                 </div>
-            `).join('');
-            
-            const landingPageHTML = `
-                <style>
-                    ${toneStyle}
-                    
-                    .landing-page {
-                        font-family: 'Montserrat', sans-serif;
-                        max-width: 1200px;
-                        margin: 0 auto;
-                        padding: 2rem;
-                        color: #333;
-                    }
-                    
-                    .hero {
-                        text-align: center;
-                        padding: 4rem 2rem;
-                        position: relative;
-                        overflow: hidden;
-                        border-radius: 15px;
-                        margin-bottom: 3rem;
-                    }
-                    
-                    .hero:before {
-                        content: "";
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background: rgba(0, 0, 0, 0.3);
-                        z-index: 1;
-                    }
-                    
-                    .hero-content {
-                        position: relative;
-                        z-index: 2;
-                        color: white;
-                    }
-                    
-                    .hero h1 {
-                        font-size: 3rem;
-                        margin-bottom: 1rem;
-                        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-                    }
-                    
-                    .hero p {
-                        font-size: 1.2rem;
-                        max-width: 700px;
-                        margin: 0 auto 2rem;
-                        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-                    }
-                    
-                    .section-title {
-                        text-align: center;
-                        margin-bottom: 3rem;
-                        position: relative;
-                    }
-                    
-                    .section-title:after {
-                        content: "";
-                        display: block;
-                        width: 80px;
-                        height: 3px;
-                        background: var(--primary);
-                        margin: 1rem auto 0;
-                    }
-                    
-                    .features {
-                        display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                        gap: 2rem;
-                        margin: 3rem 0;
-                    }
-                    
-                    .feature {
-                        background: white;
-                        padding: 2rem;
-                        border-radius: 10px;
-                        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-                        transition: all 0.3s;
-                        border-left: 4px solid var(--primary);
-                    }
-                    
-                    .feature:hover {
-                        transform: translateY(-5px);
-                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                    }
-                    
-                    .feature i {
-                        font-size: 2rem;
-                        color: var(--primary);
-                        margin-bottom: 1rem;
-                    }
-                    
-                    .feature h3 {
-                        margin-bottom: 1rem;
-                    }
-                    
-                    .testimonials {
-                        margin: 4rem 0;
-                    }
-                    
-                    .testimonial {
-                        background: white;
-                        padding: 2rem;
-                        border-radius: 10px;
-                        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-                        margin-bottom: 1.5rem;
-                        position: relative;
-                    }
-                    
-                    .testimonial:before {
-                        content: """;
-                        font-size: 5rem;
-                        color: rgba(106, 17, 203, 0.1);
-                        position: absolute;
-                        top: 10px;
-                        left: 20px;
-                        line-height: 1;
-                        font-family: serif;
-                    }
-                    
-                    .testimonial-content {
-                        position: relative;
-                        z-index: 1;
-                    }
-                    
-                    .testimonial-author {
-                        font-weight: 600;
-                        margin-top: 1rem;
-                        color: var(--primary);
-                    }
-                    
-                    .cta-section {
-                        text-align: center;
-                        padding: 4rem 2rem;
-                        border-radius: 15px;
-                        margin: 4rem 0;
-                    }
-                    
-                    .cta-section h2 {
-                        margin-bottom: 1.5rem;
-                    }
-                    
-                    .cta-section p {
-                        max-width: 700px;
-                        margin: 0 auto 2rem;
-                        font-size: 1.1rem;
-                    }
-                    
-                    footer {
-                        text-align: center;
-                        padding: 2rem;
-                        background: #f8f9fa;
-                        border-radius: 15px;
-                        margin-top: 4rem;
-                    }
-                    
-                    .footer-links {
-                        display: flex;
-                        justify-content: center;
-                        gap: 2rem;
-                        margin: 1.5rem 0;
-                    }
-                    
-                    .footer-links a {
-                        color: #666;
-                        text-decoration: none;
-                        transition: all 0.3s;
-                    }
-                    
-                    .footer-links a:hover {
-                        color: var(--primary);
-                    }
-                    
-                    .social-icons {
-                        display: flex;
-                        justify-content: center;
-                        gap: 1.5rem;
-                        margin: 1.5rem 0;
-                    }
-                    
-                    .social-icons a {
-                        color: #666;
-                        font-size: 1.5rem;
-                        transition: all 0.3s;
-                    }
-                    
-                    .social-icons a:hover {
-                        color: var(--primary);
-                    }
-                </style>
-                
-                <div class="landing-page ${toneClass}">
-                    <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center; background-size: cover;">
-                        <div class="hero-content">
-                            <h1>${productName}</h1>
-                            <p>${productDescription}</p>
-                            <a href="#order" class="cta-button">${ctaText}</a>
-                        </div>
-                    </section>
-                    
-                    <section class="luxury-section">
-                        <h2 class="section-title">Mengapa Memilih ${productName.split(' ')[0]}?</h2>
-                        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">${getWhyChooseDescription(productName, targetAudience)}</p>
-                        
-                        <div class="features">
-                            ${featuresHTML}
-                        </div>
-                    </section>
-                    
-                    <section class="testimonials">
-                        <h2 class="section-title">Apa Kata Mereka</h2>
-                        
-                        <div class="testimonial">
-                            <div class="testimonial-content">
-                                <p>"${getTestimonial(productName)}"</p>
-                                <div class="testimonial-author">- ${getRandomName()}, ${getRandomJob()}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="testimonial">
-                            <div class="testimonial-content">
-                                <p>"${getTestimonial(productName)}"</p>
-                                <div class="testimonial-author">- ${getRandomName()}, ${getRandomJob()}</div>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <section id="order" class="cta-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1483181957632-8bda974cbc91?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center; background-size: cover; color: white;">
-                        <h2>Siap Mengalami ${productName.split(' ')[0]}?</h2>
-                        <p>${getCTADescription(productName)}</p>
-                        <a href="#" class="cta-button">${ctaText}</a>
-                    </section>
-                    
-                    <footer>
-                        <h3>${productName}</h3>
-                        <p>${getShortDescription(productName)}</p>
-                        
-                        <div class="footer-links">
-                            <a href="#">Tentang Kami</a>
-                            <a href="#">Kebijakan Privasi</a>
-                            <a href="#">Syarat & Ketentuan</a>
-                            <a href="#">Kontak</a>
-                        </div>
-                        
-                        <div class="social-icons">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        </div>
-                        
-                        <p>&copy; ${new Date().getFullYear()} ${productName}. All Rights Reserved.</p>
-                    </footer>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <h3>Fitur 2</h3>
+                    <p>Deskripsi singkat tentang fitur kedua yang bermanfaat.</p>
                 </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <h3>Fitur 3</h3>
+                    <p>Deskripsi singkat tentang fitur ketiga yang istimewa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ${title}. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+</body>
+</html>
             `;
-            
-            document.getElementById('preview-content').innerHTML = landingPageHTML;
-            document.getElementById('code-section').style.display = 'block';
-            document.getElementById('generated-code').textContent = landingPageHTML;
-        });
-        
-        document.getElementById('copy-btn').addEventListener('click', function() {
-            const range = document.createRange();
-            range.selectNode(document.getElementById('preview-content'));
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            
-            alert('Pratinjau landing page telah disalin ke clipboard!');
-        });
-        
-        document.getElementById('copy-code-btn').addEventListener('click', function() {
-            const code = document.getElementById('generated-code').textContent;
-            navigator.clipboard.writeText(code).then(function() {
-                alert('Kode HTML telah disalin ke clipboard!');
-            }, function() {
-                alert('Gagal menyalin kode. Silakan coba lagi.');
-            });
-        });
-        
-        function getFeatureDescription(feature) {
-            const descriptions = {
-                'Bahan premium': 'Dibuat dengan bahan-bahan pilihan kualitas terbaik untuk memberikan pengalaman mewah yang tak tertandingi.',
-                'Desain eksklusif': 'Desain unik dan eksklusif yang dibuat oleh para ahli untuk menonjolkan kepribadian Anda.',
-                'Garansi seumur hidup': 'Kami percaya pada kualitas produk kami sehingga memberikan garansi seumur hidup untuk ketenangan pikiran Anda.',
-                'Kualitas Terbaik': 'Setiap detail dibuat dengan presisi dan perhatian terhadap kualitas tertinggi.',
-                'Pelayanan Premium': 'Tim profesional kami siap memberikan pelayanan terbaik untuk memenuhi kebutuhan eksklusif Anda.',
-                'Ramah Lingkungan': 'Produk kami dibuat dengan mempertimbangkan keberlanjutan dan dampak lingkungan.',
-                'Customizable': 'Dapat disesuaikan sesuai preferensi pribadi Anda untuk pengalaman yang benar-benar personal.'
-            };
-            
-            return descriptions[feature] || `Fitur ${feature.toLowerCase()} yang membuat produk kami istimewa dan berbeda dari yang lain.`;
         }
         
-        function getWhyChooseDescription(productName, audience) {
-            return `Ditujukan untuk ${audience}, ${productName} menawarkan pengalaman unik yang tidak akan Anda temukan di tempat lain. Setiap aspek dirancang dengan sempurna untuk memenuhi standar tertinggi dan memberikan kepuasan tak tertandingi.`;
+        function extractTitle(prompt) {
+            // Ekstrak judul dari prompt
+            const titleMatch = prompt.match(/judul ['"](.+?)['"]/i);
+            return titleMatch ? titleMatch[1] : null;
         }
         
-        function getTestimonial(productName) {
-            const testimonials = [
-                `Saya tidak pernah membayangkan ${productName} bisa sebaik ini. Kualitasnya benar-benar di atas yang lain!`,
-                `Setelah mencoba ${productName}, saya tidak bisa kembali ke produk biasa lagi. Perbedaannya sangat mencolok!`,
-                `${productName} telah mengubah cara saya memandang kualitas. Sekarang saya mengerti arti kemewahan sebenarnya.`,
-                `Pelayanan dan produk yang luar biasa. ${productName} benar-benar sepadan dengan harganya.`,
-                `Saya telah merekomendasikan ${productName} kepada semua teman saya. Tidak ada yang bisa menandinginya!`,
-                `Sebagai seseorang yang sangat memperhatikan detail, saya sangat menghargai kualitas ${productName}.`
-            ];
-            
-            return testimonials[Math.floor(Math.random() * testimonials.length)];
+        function extractCTAText(prompt) {
+            // Ekstrak teks CTA dari prompt
+            const ctaMatch = prompt.match(/tombol CTA ['"](.+?)['"]/i);
+            return ctaMatch ? ctaMatch[1] : null;
         }
         
-        function getRandomName() {
-            const names = ['Andrea Wijaya', 'Budi Santoso', 'Citra Dewi', 'Dian Pratama', 'Eka Surya', 'Fiona Lim', 'Gregorius', 'Hana Putri'];
-            return names[Math.floor(Math.random() * names.length)];
+        function extractDescription(prompt) {
+            // Coba ekstrak deskripsi dari prompt
+            if (prompt.includes("deskripsi produk")) {
+                const parts = prompt.split("deskripsi produk");
+                if (parts.length > 1) {
+                    return parts[1].split(",")[0].trim();
+                }
+            }
+            return null;
         }
         
-        function getRandomJob() {
-            const jobs = ['Pengusaha', 'Artis', 'Dokter', 'Pengacara', 'Desainer', 'Eksekutif', 'Konsultan', 'Public Figure'];
-            return jobs[Math.floor(Math.random() * jobs.length)];
+        function lightenColor(color, percent) {
+            // Fungsi untuk mencerahkan warna
+            const num = parseInt(color.replace("#", ""), amt = Math.round(2.55 * percent);
+            const R = (num >> 16) + amt;
+            const G = (num >> 8 & 0x00FF) + amt;
+            const B = (num & 0x0000FF) + amt;
+            return "#" + (
+                0x1000000 + 
+                (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + 
+                (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + 
+                (B < 255 ? B < 1 ? 0 : B : 255)
+            ).toString(16).slice(1);
         }
         
-        function getCTADescription(productName) {
-            return `Jangan lewatkan kesempatan untuk memiliki ${productName}. Pesan sekarang dan rasakan perbedaannya! Penawaran terbatas hanya untuk pelanggan terpilih.`;
-        }
-        
-        function getShortDescription(productName) {
-            return `${productName} - Merangkul kemewahan dalam setiap detail, untuk mereka yang menghargai yang terbaik dalam hidup.`;
+        function darkenColor(color, percent) {
+            // Fungsi untuk menggelapkan warna
+            const num = parseInt(color.replace("#", ""), 16),
+                amt = Math.round(2.55 * percent),
+                R = (num >> 16) - amt,
+                G = (num >> 8 & 0x00FF) - amt,
+                B = (num & 0x0000FF) - amt;
+            return "#" + (
+                0x1000000 +
+                (R < 255 ? R < 0 ? 0 : R : 255) * 0x10000 +
+                (G < 255 ? G < 0 ? 0 : G : 255) * 0x100 +
+                (B < 255 ? B < 0 ? 0 : B : 255)
+            ).toString(16).slice(1);
         }
     </script>
 </body>

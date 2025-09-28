@@ -1,390 +1,262 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Landing Page dengan AI</title>
+    <title>NudeAI Magic Transformer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            color: #333;
+        .dropzone {
+            border: 2px dashed #9CA3AF;
+            transition: all 0.3s;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .dropzone-active {
+            border-color: #EC4899;
+            background-color: rgba(236, 72, 153, 0.1);
         }
-        
-        header {
-            background-color: #4a6bff;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        
-        .generator-section {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .input-section, .output-section {
-            flex: 1;
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        h2 {
-            color: #4a6bff;
-            margin-top: 0;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        textarea {
-            width: 100%;
-            min-height: 200px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: monospace;
-            resize: vertical;
-            margin-bottom: 15px;
-        }
-        
-        button {
-            background-color: #4a6bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #3a5bef;
-        }
-        
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        .preview {
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 4px;
-            min-height: 300px;
-            background: #f9f9f9;
-            overflow: auto;
-        }
-        
-        .options {
-            margin: 15px 0;
-        }
-        
-        .option-group {
-            margin-bottom: 10px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        select, input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .download-btn {
-            background-color: #28a745;
-            margin-top: 10px;
-        }
-        
-        .download-btn:hover {
-            background-color: #218838;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: #4a6bff;
+        .processing-loader {
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
         }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        @media (max-width: 768px) {
-            .generator-section {
-                flex-direction: column;
-            }
-        }
     </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Generator Landing Page dengan AI</h1>
-            <p>Buat landing page profesional hanya dengan menuliskan deskripsi Anda</p>
-        </div>
-    </header>
-    
-    <div class="container">
-        <div class="generator-section">
-            <div class="input-section">
-                <h2>Masukkan Prompt Anda</h2>
-                <textarea id="prompt-input" placeholder="Contoh: Buatkan landing page untuk produk kecantikan dengan warna pink, judul 'Glow Serum', deskripsi produk, tombol CTA 'Beli Sekarang', dan testimonial pelanggan"></textarea>
-                
-                <div class="options">
-                    <div class="option-group">
-                        <label for="color-theme">Warna Tema:</label>
-                        <select id="color-theme">
-                            <option value="#4a6bff">Biru</option>
-                            <option value="#28a745">Hijau</option>
-                            <option value="#dc3545">Merah</option>
-                            <option value="#ffc107">Kuning</option>
-                            <option value="#6f42c1">Ungu</option>
-                            <option value="#fd7e14">Oranye</option>
-                            <option value="#ff6b8b">Pink</option>
-                            <option value="#20c997">Teal</option>
-                        </select>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">AI Undress</h1>
+            <p class="text-gray-400">Transform photos with our powerful AI technology</p>
+        </header>
+<main>
+            <!-- Upload Section -->
+            <div class="bg-gray-800 rounded-xl p-4 mb-6 shadow-lg">
+                <div id="dropzone" class="dropzone rounded-lg p-6 text-center cursor-pointer transition-colors"
+                    onclick="document.getElementById('file-input').click()">
+                    <div class="flex flex-col items-center justify-center space-y-3">
+                        <i data-feather="upload" class="w-10 h-10 text-pink-500"></i>
+                        <h3 class="text-lg font-semibold">Drop image here</h3>
+                        <p class="text-gray-400 text-sm">or click to select</p>
+                        <p class="text-xs text-gray-500">Supports JPG, PNG (Max 8MB)</p>
                     </div>
-                    
-                    <div class="option-group">
-                        <label for="layout-style">Gaya Layout:</label>
-                        <select id="layout-style">
-                            <option value="modern">Modern</option>
-                            <option value="minimal">Minimalis</option>
-                            <option value="corporate">Korporat</option>
-                            <option value="creative">Kreatif</option>
-                            <option value="ecommerce">E-commerce</option>
-                        </select>
-                    </div>
-                    
-                    <div class="option-group">
-                        <label for="api-key">API Key OpenAI:</label>
-                        <input type="password" id="api-key" placeholder="Masukkan API key OpenAI Anda">
-                        <small style="color: #666;">Kami tidak menyimpan API key Anda. Key hanya digunakan untuk permintaan sekali pakai.</small>
-                    </div>
-                </div>
-                
-                <button id="generate-btn">Generate Landing Page</button>
-                <div class="loading" id="loading">
-                    <div class="spinner"></div>
-                    <p>Sedang membuat landing page...</p>
+                    <input type="file" id="file-input" class="hidden" accept="image/*">
                 </div>
             </div>
-            
-            <div class="output-section">
-                <h2>Hasil Landing Page</h2>
-                <div class="preview" id="html-preview">
-                    <p>Landing page akan muncul di sini setelah Anda mengklik tombol generate.</p>
+            <!-- Effect Selection -->
+            <div class="bg-gray-800 rounded-xl p-4 mb-6 shadow-lg">
+                <h3 class="text-lg font-semibold mb-3 flex items-center">
+                    <i data-feather="sliders" class="mr-2"></i>
+                    AI Style
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div class="effect-option bg-gray-700 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-600 transition-colors border border-pink-500">
+                        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center">
+                            <i data-feather="user" class="w-5 h-5"></i>
+                        </div>
+                        <p class="text-sm">Nude</p>
+                    </div>
+                    <div class="effect-option bg-gray-700 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-600 transition-colors border border-gray-600">
+                        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gray-600 flex items-center justify-center">
+                            <i data-feather="heart" class="w-5 h-5 text-pink-500"></i>
+                        </div>
+                        <p class="text-sm">Bikini</p>
+                    </div>
+                    <div class="effect-option bg-gray-700 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-600 transition-colors border border-gray-600">
+                        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gray-600 flex items-center justify-center">
+                            <i data-feather="droplet" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <p class="text-sm">Wet</p>
+                    </div>
+                    <div class="effect-option bg-gray-700 rounded-lg p-3 text-center cursor-pointer hover:bg-gray-600 transition-colors border border-gray-600">
+                        <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-gray-600 flex items-center justify-center">
+                            <i data-feather="star" class="w-5 h-5 text-yellow-400"></i>
+                        </div>
+                        <p class="text-sm">Glow</p>
+                    </div>
                 </div>
-                <button id="copy-btn">Salin Kode HTML</button>
-                <button class="download-btn" id="download-btn">Download sebagai HTML</button>
             </div>
-        </div>
-    </div>
-    
-    <footer>
-        <div class="container">
-            <p>Generator Landing Page dengan AI &copy; 2023 | Gunakan API key OpenAI Anda sendiri</p>
-        </div>
-    </footer>
+            <!-- Preview Section -->
+            <div class="bg-gray-800 rounded-xl p-4 mb-6 shadow-lg hidden" id="preview-section">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-lg font-semibold flex items-center">
+                        <i data-feather="image" class="mr-2"></i>
+                        Result
+                    </h3>
+                    <div class="flex space-x-2">
+                        <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full">
+                            <i data-feather="refresh-cw" class="w-3 h-3 mr-1 inline"></i>
+                            Retry
+                        </button>
+                        <button class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full">
+                            <i data-feather="settings" class="w-3 h-3 mr-1 inline"></i>
+                            Adjust
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">Original</p>
+                        <div class="bg-gray-700 rounded-lg overflow-hidden aspect-square">
+                            <img id="original-image" class="w-full h-full object-cover" src="" alt="Original image">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">AI Result</p>
+                        <div class="bg-gray-700 rounded-lg overflow-hidden aspect-square relative">
+                            <div id="loading-indicator" class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
+                                <div class="processing-loader w-10 h-10 border-4 border-pink-500 border-t-transparent rounded-full"></div>
+                                <span class="ml-3">Processing...</span>
+                            </div>
+                            <img id="transformed-image" class="w-full h-full object-cover" src="" alt="Transformed image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <button 
+                    id="process-btn"
+                    class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2.5 rounded-lg font-medium flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled
+                >
+                    <i data-feather="zap" class="w-4 h-4 mr-2"></i>
+                    Generate
+                </button>
+                <button 
+                    id="download-btn"
+                    class="bg-gray-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center justify-center hover:bg-gray-600 transition-colors hidden"
+                >
+                    <i data-feather="download" class="w-4 h-4 mr-2"></i>
+                    Download
+                </button>
+                <button 
+                    id="save-btn"
+                    class="bg-gray-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center justify-center hover:bg-gray-600 transition-colors hidden"
+                >
+                    <i data-feather="save" class="w-4 h-4 mr-2"></i>
+                    Save
+                </button>
+            </div>
+</main>
+        <footer class="mt-12 text-center text-gray-500 text-xs">
+            <p>This tool uses AI to generate artistic transformations. Must be 18+ to use.</p>
+            <div class="flex justify-center space-x-4 mt-3">
+                <a href="#" class="hover:text-pink-500">Terms</a>
+                <a href="#" class="hover:text-pink-500">Privacy</a>
+                <a href="#" class="hover:text-pink-500">Contact</a>
+            </div>
+            <p class="mt-3">© 2023 AI Undress - All rights reserved</p>
+        </footer>
+</div>
 
     <script>
-        document.getElementById('generate-btn').addEventListener('click', async function() {
-            const prompt = document.getElementById('prompt-input').value;
-            const colorTheme = document.getElementById('color-theme').value;
-            const layoutStyle = document.getElementById('layout-style').value;
-            const apiKey = document.getElementById('api-key').value;
-            // Tambahkan fungsi validasi ini
-function isValidApiKey(key) {
-    return key && key.startsWith('sk-') && key.length > 30;
-}
-
-// Modifikasi event listener generate button
-document.getElementById('generate-btn').addEventListener('click', async function() {
-    const apiKey = document.getElementById('api-key').value.trim();
-    
-    if (!isValidApiKey(apiKey)) {
-        alert('API key tidak valid! Pastikan key Anda dimulai dengan "sk-" dan panjangnya lebih dari 30 karakter');
-        return;
-    }
-    
-    // Lanjutkan proses generate...
-});
-            if (!prompt) {
-                alert('Silakan masukkan prompt terlebih dahulu!');
-                return;
-            }
-            
-            if (!apiKey) {
-                alert('Silakan masukkan API key OpenAI Anda!');
-                return;
-            }
-            
-            // Tampilkan loading
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('generate-btn').disabled = true;
-            
-            try {
-                const generatedHTML = await generateWithAI(prompt, colorTheme, layoutStyle, apiKey);
-                
-                // Buat iframe untuk preview yang lebih baik
-                const preview = document.getElementById('html-preview');
-                preview.innerHTML = '';
-                
-                const previewFrame = document.createElement('iframe');
-                previewFrame.style.width = '100%';
-                previewFrame.style.height = '500px';
-                previewFrame.style.border = '1px solid #ddd';
-                previewFrame.style.borderRadius = '4px';
-                previewFrame.style.backgroundColor = 'white';
-                
-                preview.appendChild(previewFrame);
-                
-                const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-                previewDoc.open();
-                previewDoc.write(generatedHTML);
-                previewDoc.close();
-                
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat membuat landing page: ' + error.message);
-            } finally {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('generate-btn').disabled = false;
-            }
-        });
+        feather.replace();
         
-        document.getElementById('copy-btn').addEventListener('click', function() {
-            const preview = document.getElementById('html-preview');
-            const iframe = preview.querySelector('iframe');
-            
-            if (iframe) {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                const htmlContent = iframeDoc.documentElement.outerHTML;
-                
-                navigator.clipboard.writeText(htmlContent).then(function() {
-                    alert('Kode HTML berhasil disalin!');
-                }, function() {
-                    alert('Gagal menyalin kode HTML.');
-                });
-            } else {
-                alert('Generate landing page terlebih dahulu!');
-            }
-        });
-        
-        document.getElementById('download-btn').addEventListener('click', function() {
-            const preview = document.getElementById('html-preview');
-            const iframe = preview.querySelector('iframe');
-            
-            if (iframe) {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                const htmlContent = iframeDoc.documentElement.outerHTML;
-                
-                const blob = new Blob([htmlContent], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'landing-page.html';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            } else {
-                alert('Generate landing page terlebih dahulu!');
-            }
-        });
-        
-        async function generateWithAI(prompt, color, style, apiKey) {
-            const systemMessage = `
-Anda adalah seorang web developer profesional yang ahli dalam membuat landing page yang menarik dan efektif. 
-Buatkan kode HTML dan CSS untuk sebuah landing page berdasarkan permintaan pengguna.
+        // Dropzone functionality
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('file-input');
+        const originalImage = document.getElementById('original-image');
+        const transformedImage = document.getElementById('transformed-image');
+        const processBtn = document.getElementById('process-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const previewSection = document.getElementById('preview-section');
+        const loadingIndicator = document.getElementById('loading-indicator');
 
-Instruksi:
-1. Gunakan warna utama: ${color}
-2. Gunakan gaya: ${style}
-3. Buat desain yang responsif (mobile-friendly)
-4. Sertakan bagian-bagian penting seperti header, hero section, fitur, testimoni, dan call-to-action
-5. Gunakan CSS modern dengan flexbox/grid
-6. Berikan animasi sederhana untuk meningkatkan user experience
-7. Pastikan kode bersih dan terstruktur dengan baik
-
-Format respon:
-- Hanya kembalikan kode HTML lengkap
-- Tidak perlu penjelasan tambahan
-- Gunakan format HTML5 yang valid
-`;
-            
-            const messages = [
-                { role: "system", content: systemMessage },
-                { role: "user", content: prompt }
-            ];
-            
-            const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: "gpt-4",
-                    messages: messages,
-                    temperature: 0.7
-                })
+        // Highlight dropzone when dragging over
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dropzone-active');
             });
-            
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(data.error?.message || 'Gagal membuat landing page');
+        });
+
+        ['dragleave', 'dragend'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.classList.remove('dropzone-active');
+            });
+        });
+
+        // Handle file drop
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dropzone-active');
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelection();
             }
-            
-            return data.choices[0]?.message?.content || '';
+        });
+
+        // Handle file selection via click
+        fileInput.addEventListener('change', handleFileSelection);
+
+        function handleFileSelection() {
+            const file = fileInput.files[0];
+            if (file && file.type.match('image.*')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    originalImage.src = e.target.result;
+                    previewSection.classList.remove('hidden');
+                    processBtn.disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
         }
-    </script>
+
+        // Process button click
+        processBtn.addEventListener('click', function() {
+            loadingIndicator.classList.remove('hidden');
+            transformedImage.src = '';
+            
+            // Simulate AI processing (in a real app, this would be an API call)
+            setTimeout(() => {
+                // This would be replaced with actual transformed image from API
+                transformedImage.src = originalImage.src; // Placeholder - replace with actual transformed image
+                loadingIndicator.classList.add('hidden');
+                downloadBtn.classList.remove('hidden');
+                
+                // Scroll to results
+                transformedImage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 3000);
+        });
+
+        // Download button click
+        downloadBtn.addEventListener('click', function() {
+            // In a real app, this would download the transformed image
+            alert('Download functionality would be implemented here');
+        });
+        // Style selection
+        const effectOptions = document.querySelectorAll('.effect-option');
+        effectOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                effectOptions.forEach(opt => {
+                    opt.classList.remove('border-pink-500');
+                    opt.classList.add('border-gray-600');
+                });
+                this.classList.add('border-pink-500');
+                this.classList.remove('border-gray-600');
+            });
+        });
+
+        // Process button click
+        processBtn.addEventListener('click', function() {
+            loadingIndicator.classList.remove('hidden');
+            transformedImage.src = '';
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                // In a real app, this would be an API call
+                transformedImage.src = originalImage.src; // Placeholder
+                loadingIndicator.classList.add('hidden');
+                downloadBtn.classList.remove('hidden');
+                document.getElementById('save-btn').classList.remove('hidden');
+            }, 2000);
+        });
+
+        // Initialize first option as selected
+        effectOptions[0].click();
+</script>
 </body>
 </html>

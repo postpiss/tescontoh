@@ -47,14 +47,16 @@
             <div class="flex flex-col md:flex-row gap-8">
                 <div class="w-full md:w-1/2">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-6">Upload Gambar Produk Anda</h3>
-                    
-                    <div class="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center mb-6">
+                    <div class="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center mb-6" id="uploadArea">
                         <i class="fas fa-cloud-upload-alt text-4xl text-blue-500 mb-4"></i>
                         <p class="text-gray-600 mb-4">Drag & drop gambar produk Anda disini</p>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Pilih File</button>
+                        <input type="file" id="fileInput" accept="image/*" class="hidden">
+                        <button onclick="document.getElementById('fileInput').click()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium">Pilih File</button>
+                        <div id="previewContainer" class="mt-4 hidden">
+                            <img id="imagePreview" class="max-h-40 mx-auto rounded-lg">
+                        </div>
                     </div>
-
-                    <div class="space-y-4">
+<div class="space-y-4">
                         <div>
                             <label class="block text-gray-700 mb-2">Pilih Style Video</label>
                             <select class="w-full p-3 border border-gray-300 rounded-lg">
@@ -93,13 +95,28 @@
 
                 <div class="w-full md:w-1/2">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-6">Preview Video</h3>
-                    <div class="video-preview rounded-lg w-full h-96 flex items-center justify-center mb-6">
+                    <div class="video-preview rounded-lg w-full h-96 flex items-center justify-center mb-6" id="videoPreviewArea">
                         <p class="text-gray-500">Video preview akan muncul disini</p>
                     </div>
-                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium text-lg">
+<button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium text-lg">
                         <i class="fas fa-magic mr-2"></i> Generate Video
                     </button>
-                </div>
+                    <div id="loadingIndicator" class="hidden mt-4 text-center">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 mb-2"></div>
+                        <p class="text-gray-600">Sedang memproses video...</p>
+                    </div>
+                    <div id="resultContainer" class="hidden mt-4">
+                        <video id="generatedVideo" controls class="w-full rounded-lg"></video>
+                        <div class="flex justify-center mt-4 space-x-4">
+                            <button id="downloadBtn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                                <i class="fas fa-download mr-2"></i> Download
+                            </button>
+                            <button id="regenerateBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                                <i class="fas fa-sync-alt mr-2"></i> Regenerate
+                            </button>
+                        </div>
+                    </div>
+</div>
             </div>
         </section>
 
@@ -172,19 +189,128 @@
             </div>
         </div>
     </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+        <script>
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const previewContainer = document.getElementById('previewContainer');
+            const imagePreview = document.getElementById('imagePreview');
+            const generateBtn = document.getElementById('generateBtn');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const resultContainer = document.getElementById('resultContainer');
+            const generatedVideo = document.getElementById('generatedVideo');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const regenerateBtn = document.getElementById('regenerateBtn');
+            let currentFile = null;
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <script>
-        // Simple animation for the upload area
-        const uploadArea = document.querySelector('.border-dashed');
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('border-blue-500', 'bg-blue-50');
-        });
-        
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('border-blue-500', 'bg-blue-50');
-        });
-    </script>
+            // Handle drag and drop
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('border-blue-500', 'bg-blue-50');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('border-blue-500', 'bg-blue-50');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('border-blue-500', 'bg-blue-50');
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect(e.dataTransfer.files[0]);
+                }
+            });
+
+            // Handle file selection
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    handleFileSelect(e.target.files[0]);
+                }
+            });
+
+            function handleFileSelect(file) {
+                if (!file.type.match('image.*')) {
+                    alert('Hanya file gambar yang diperbolehkan');
+                    return;
+                }
+
+                currentFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    previewContainer.classList.remove('hidden');
+                    resultContainer.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Generate video function
+            generateBtn.addEventListener('click', async () => {
+                if (!currentFile) {
+                    alert('Silakan upload gambar terlebih dahulu');
+                    return;
+                }
+
+                generateBtn.disabled = true;
+                loadingIndicator.classList.remove('hidden');
+                
+                try {
+                    // Simulate video generation (replace with actual API call)
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+                    
+                    // For demo purposes, we'll create a simple video from the image
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    
+                    img.onload = function() {
+                        canvas.width = 800;
+                        canvas.height = 600;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        // Add some animation for demo
+                        ctx.font = '30px Arial';
+                        ctx.fillStyle = 'white';
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = 2;
+                        ctx.textAlign = 'center';
+                        ctx.fillText('Produk Anda', canvas.width/2, 50);
+                        ctx.strokeText('Produk Anda', canvas.width/2, 50);
+                        
+                        // Convert canvas to video (simulated)
+                        const videoBlob = new Blob([canvas.toDataURL()], {type: 'video/mp4'});
+                        const videoUrl = URL.createObjectURL(videoBlob);
+                        
+                        generatedVideo.src = videoUrl;
+                        loadingIndicator.classList.add('hidden');
+                        resultContainer.classList.remove('hidden');
+                        generateBtn.disabled = false;
+                    };
+                    
+                    img.src = URL.createObjectURL(currentFile);
+                    
+                } catch (error) {
+                    console.error('Error generating video:', error);
+                    alert('Terjadi kesalahan saat membuat video');
+                    loadingIndicator.classList.add('hidden');
+                    generateBtn.disabled = false;
+                }
+            });
+
+            // Download video
+            downloadBtn.addEventListener('click', () => {
+                const a = document.createElement('a');
+                a.href = generatedVideo.src;
+                a.download = 'video-promosi.mp4';
+                a.click();
+            });
+
+            // Regenerate video
+            regenerateBtn.addEventListener('click', () => {
+                resultContainer.classList.add('hidden');
+                generateBtn.click();
+            });
+        </script>
 </body>
 </html>
